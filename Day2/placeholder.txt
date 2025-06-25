@@ -1,0 +1,73 @@
+from pathlib import Path
+
+# File paths
+input_script_path = "/mnt/data/MasteringPythonZeroToHero-Day2.py"
+output_script_path = "/mnt/data/MasteringPythonZeroToHero-Day2_Explained.py"
+
+# Load the raw Python file
+with open(input_script_path, "r", encoding="utf-8") as f:
+    raw_lines = f.readlines()
+
+# Enhanced explanation for teaching (markdown-style comments per block or line)
+explanations = {
+    "x=3": "# Define an integer variable `x` and assign the value 3",
+    "x=5.7": "# Reassign `x` with a float value 5.7",
+    "abc=556.32": "# Assign a float value to variable `abc`",
+    "a,b,c,d,f= 3,5,6.0,7.2,-3": "# Multiple variable assignments in one line",
+    "del abc": "# Delete the variable `abc` from memory",
+    "c=2+4j": "# Define a complex number variable `c`",
+    "s=\"Hello world\"": "# Assign a string value to variable `s`",
+    "x=2**3": "# Exponentiation: 2 to the power of 3",
+    "x/3": "# Division of x by 3",
+    "v=5.5": "# Assign float value to `v`",
+    "g=2": "# Assign integer value to `g`",
+    "p=v%g": "# Modulus operation: remainder of v divided by g",
+    "p=v//g": "# Floor division: v divided by g, discarding the remainder",
+    "sumofaAndb=a+b": "# Add variables a and b and assign to `sumofaAndb`",
+    "type(a+d)": "# Check type of the result of a+d",
+    "v=((a+d)**3)/4": "# Expression with arithmetic and power",
+    "s1=\"hello\"": "# Define string `s1`",
+    "s2=\" world\"": "# Define string `s2`",
+    "s=s1+s2": "# Concatenate strings s1 and s2",
+    "a==b": "# Check if a equals b",
+    "a != b": "# Check if a not equals b",
+    "a<b": "# Check if a is less than b",
+    "a=True": "# Assign boolean True to a",
+    "b=True": "# Assign boolean True to b",
+    "c= False": "# Assign boolean False to c",
+    "print(a and b)": "# Logical AND of a and b",
+    "print(b and c)": "# Logical AND of b and c",
+    "print(a and c)": "# Logical AND of a and c",
+    "d= a or c": "# Logical OR of a and c",
+    "not(c)": "# Logical NOT of c",
+    "print(2<3)": "# Comparison: 2 is less than 3",
+    "c=2<3": "# Assign result of comparison to variable c",
+    "d=3==4": "# Check if 3 equals 4",
+    "print(d)": "# Print value of d (False)",
+    "3==3.0": "# True: Python treats int and float with same value as equal",
+    "x=4": "# Assign 4 to x",
+    "y=9": "# Assign 9 to y",
+    "z=8.3": "# Assign 8.3 to z",
+    "r=-3": "# Assign -3 to r",
+    "round(4.6)": "# Round 4.6 to nearest integer",
+    "round(4.5584,3)": "# Round 4.5584 to 3 decimal places",
+    "divmod(27,5)": "# Return tuple (quotient, remainder) of 27/5",
+    "G=divmod(34,9)": "# Store the result of divmod(34,9) in variable G",
+    "print(G)": "# Print the tuple G",
+    "type(G)": "# Check the type of G (tuple)",
+    "G[1]": "# Access second element (remainder) of tuple G"
+}
+
+# Insert explanation comments before relevant lines
+enhanced_lines = []
+for line in raw_lines:
+    stripped = line.strip()
+    if stripped in explanations:
+        enhanced_lines.append(f"{explanations[stripped]}\n")
+    enhanced_lines.append(line)
+
+# Write to new file
+with open(output_script_path, "w", encoding="utf-8") as f:
+    f.writelines(enhanced_lines)
+
+output_script_path
