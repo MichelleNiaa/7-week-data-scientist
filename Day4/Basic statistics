@@ -1,0 +1,43 @@
+import pandas as pd
+import numpy as np
+
+# Dataset
+data = [8, 30, 30, 54, 86, 94, 102, 110, 169, 170, 176, 236, 240, 241, 242, 255, 262, 276, 279, 282]
+
+# Convert to pandas Series
+series = pd.Series(data)
+
+# Basic statistics
+mean = series.mean()
+median = series.median()
+mode = series.mode().tolist()
+std_dev = series.std(ddof=1)  # Sample standard deviation
+variance = series.var(ddof=1)
+cv = std_dev / mean  # Coefficient of Variation
+
+# Frequency distribution (6 equal-width bins)
+bins_rounded = np.linspace(min(data), max(data), 7)  # 6 intervals -> 7 points
+categories = pd.cut(series, bins=bins_rounded, include_lowest=True)
+frequency = categories.value_counts().sort_index()
+relative_frequency = frequency / len(series)
+
+# Create frequency distribution table
+freq_table = pd.DataFrame({
+    "Interval": frequency.index.astype(str),
+    "Absolute Frequency": frequency.values,
+    "Relative Frequency": relative_frequency.values
+})
+
+import ace_tools as tools; tools.display_dataframe_to_user(name="Frequency Distribution Table", dataframe=freq_table)
+
+# Summary stats
+summary_stats = {
+    "Mean": mean,
+    "Median": median,
+    "Mode": mode,
+    "Standard Deviation": std_dev,
+    "Variance": variance,
+    "Coefficient of Variation": cv
+}
+
+summary_stats
